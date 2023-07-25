@@ -36,6 +36,7 @@ int append_hexa_code(char ascii_code, char buffer[], int i)
 
 	return (3);
 }
+
 /**
  * is_digit - Verifies if a char is a digit
  * @c: Char to be evaluated
