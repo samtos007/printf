@@ -1,13 +1,13 @@
 #include "main.h"
 
-/************************* PRINT CHAR *************************/
+/************************* PRINT_CHAR (character) *************************/
 
 /**
- * print_char - Prints a char
- * @types: List a of arguments
- * @buffer: Buffer array to handle print
+ * print_char - Prints a character, char
+ * @types: List the type of arguments
+ * @buffer: Buffer array[] to handle print
  * @flags:  Calculates active flags
- * @width: Width
+ * @width: Width spec
  * @precision: Precision specification
  * @size: Size specifier
  * Return: Number of chars printed
@@ -19,56 +19,56 @@ int print_char(va_list types, char buffer[],
 
 	return (handle_write_char(c, buffer, flags, width, precision, size));
 }
-/************************* PRINT A STRING *************************/
+/************************* PRINTS A STRING *************************/
 /**
  * print_string - Prints a string
  * @types: List a of arguments
  * @buffer: Buffer array to handle print
- * @flags:  Calculates active flags
- * @width: get width.
- * @precision: Precision specification
- * @size: Size specifier
+ * @sflags:  Calculates active flags
+ * @swidth: get width.
+ * @sprecision: Precision specification
+ * @ssize: Size specifier
  * Return: Number of chars printed
  */
 int print_string(va_list types, char buffer[],
-	int flags, int width, int precision, int size)
+	int sflags, int swidth, int sprecision, int ssize)
 {
 	int length = 0, i;
 	char *str = va_arg(types, char *);
 
 	UNUSED(buffer);
-	UNUSED(flags);
-	UNUSED(width);
-	UNUSED(precision);
-	UNUSED(size);
+	UNUSED(sflags);
+	UNUSED(swidth);
+	UNUSED(sprecision);
+	UNUSED(ssize);
 	if (str == NULL)
 	{
 		str = "(null)";
-		if (precision >= 6)
+		if (sprecision >= 6)
 			str = "      ";
 	}
 
 	while (str[length] != '\0')
 		length++;
 
-	if (precision >= 0 && precision < length)
-		length = precision;
+	if (sprecision >= 0 && sprecision < length)
+		length = sprecision;
 
-	if (width > length)
+	if (swidth > length)
 	{
-		if (flags & F_MINUS)
+		if (sflags & F_MINUS)
 		{
 			write(1, &str[0], length);
-			for (i = width - length; i > 0; i--)
+			for (i = swidth - length; i > 0; i--)
 				write(1, " ", 1);
-			return (width);
+			return (swidth);
 		}
 		else
 		{
-			for (i = width - length; i > 0; i--)
+			for (i = swidth - length; i > 0; i--)
 				write(1, " ", 1);
 			write(1, &str[0], length);
-			return (width);
+			return (swidth);
 		}
 	}
 
